@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+
+@font-face {
+    font-family: 'nunitoSansregular';
+    src: url(/public/font/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf);
+     font-weight: 300;
+}
+@font-face {
+    font-family: 'nunitoSansbold';
+    src: url(/public/font/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf);
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'nunitoSansBoldest';
+    src: url(/public/font/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf);
+     font-weight: 800;
+}
+
+/* @theme{
+    --breakpoint-xl: 71.25rem;
+    elements-light: hsl(0, 52%, 49%);
+    background-light: hsl(0, 0%, 99%);
+    text-light: hsl(200, 15%, 8%);
+    input-light: hsl(0, 0%, 50%);
+    elements-dark: hsl(208, 75%, 44%);
+    background-dark: hsl(207, 26%, 17%);
+    text-dark: hsl(0, 100%, 100%);
+    input-dark: hsl(0, 0%, 70%);
+} */
+
+:root {
+    --elements: hsl(0, 52%, 49%);
+    --background: hsl(0, 0%, 99%);
+    --text:  hsl(200, 15%, 8%);
+    --input: hsl(0, 0%, 50%);
+}
+
+[data-theme="true"] {
+    --elements:  hsl(209, 45%, 11%);
+    --background: hsl(207, 26%, 17%);
+    --text:  hsl(0, 100%, 100%);
+    --input: hsl(0, 0%, 70%);
+}
+.bg-background {
+    background-color: var(--background);
+}
+.text-elements {
+    color: var(--elements);
+}
+.text-input {
+    color: var(--input);
+}
+.text-text {
+    color: var(--text);
+}
+ select, option {
+    font-family: 'nunitoSansregular', arial; 
+    font-weight: 300;
+    font-size: 16px; 
+    color: #333; 
+  }
+@layer base {
+    body {
+        font-family: 'nunitoSansregular';
+        background-color: var(--color-background);
+        color: var(--color-text);
+    }
+    h1{
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+}
+.homepageItemsText{
+    font-size: 0.875rem;
+}
+.detailPageText{
+    font-size: 1rem;
+}
+.fontRegular{
+    font-family: 'nunitoSansregular';
+}
+.fontBold{
+    font-family: 'nunitoSansbold';
+}
+.fontBoldest{
+    font-family: 'nunitoSansBoldest';
+}
+
+@theme{
+    --breakpoint-xl:71.25rem;
+}
