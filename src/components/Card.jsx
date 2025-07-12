@@ -3,7 +3,7 @@ import React from "react";
 
 const Card = ({ filteredCountries,setSelectedCountry }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-12 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  ">
       {filteredCountries.map((country, index) => (
         <div
           key={index}
