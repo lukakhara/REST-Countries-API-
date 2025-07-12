@@ -91,3 +91,6 @@
 @theme{
     --breakpoint-xl:71.25rem;
 }
+.test{
+    @apply border-2 border-red-500;
+}
