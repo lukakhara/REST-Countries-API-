@@ -9,8 +9,8 @@ import Detail from "./components/Detail";
 function App() {
   useEffect(() => {
     fetch(
-      "https://restcountries.com/v3.1/all?fields=name,population,region,capital,flags,languages,currencies,subregion,borders,tld"
-    )
+      "https://restcountries.com/v3.1/all?fields=name,population,cca3,capital,flags,languages,currencies,subregion,borders,tld"
+    ) 
       .then((response) => response.json())
       .then((allCountries) => {
         const countryMap = {};

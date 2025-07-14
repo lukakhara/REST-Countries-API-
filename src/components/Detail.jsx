@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {getRegionFromSubRegion} from "../utils/getRegionFromSubRegion";
 
 const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
   if (!selectedCountry) {
@@ -23,6 +24,8 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
   const borderCountryNames = getBorderCountryNames(selectedCountry.borders);
 
   console.log("Selected Country:", selectedCountry);
+  console.log("Border Country cca3:", countries.map(country => country.cca3));
+
   return (
     <div className="px-10">
       <button
@@ -46,7 +49,6 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
         />
         <div className=" md:w-2/3 flex flex-col gap-10 flex-1">
           <h2 className="text-2xl fontBoldest ">
-            {/* {selectedCountry ? selectedCountry.region : "Country Name"} */}
             {selectedCountry.name?.common || "Unknown Country"}
           </h2>
           <div className="xl:flex gap-4 justify-between flex-wrap ">
@@ -60,7 +62,7 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
                 {selectedCountry.population.toLocaleString() || "N/A"}
               </p>
               <p className="mb-2">
-                <strong>Region:</strong> {selectedCountry.region || "N/A"}
+                  <strong >Region:</strong> {getRegionFromSubRegion(selectedCountry.subregion) || "N/A"}
               </p>
               <p className="mb-2">
                 <strong>Sub Region:</strong>{" "}
