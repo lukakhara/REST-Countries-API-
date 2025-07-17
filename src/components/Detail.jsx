@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import {getRegionFromSubRegion} from "../utils/getRegionFromSubRegion";
+import { getRegion } from "../utils/getRegion";
 
 const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
-  if (!selectedCountry) {
-    return (
-      <div className=" py-10 text-center">
-        <p>No country selected</p>
-      </div>
-    );
-  }
+  const [countryMap, setCountryMap] = useState({});
+
+  // Create the country map when countries data changes
+  useEffect(() => {
+    const map = {};
+    countries.forEach((country) => {
+      map[country.name.common.toLowerCase()] = country;
+    });
+    setCountryMap(map);
+  }, [countries]);
+
+  const findCountryOptimized = (countryName) => {
+    return countryMap[countryName.toLowerCase()];
+  };
 
   const getBorderCountryNames = (borderCodes) => {
     if (!borderCodes || borderCodes.length === 0) return [];
@@ -21,10 +28,15 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
     });
   };
 
-  const borderCountryNames = getBorderCountryNames(selectedCountry.borders);
+  if (!selectedCountry) {
+    return (
+      <div className="py-10 text-center">
+        <p>No country selected</p>
+      </div>
+    );
+  }
 
-  console.log("Selected Country:", selectedCountry);
-  console.log("Border Country cca3:", countries.map(country => country.cca3));
+  const borderCountryNames = getBorderCountryNames(selectedCountry.borders);
 
   return (
     <div className="px-10">
@@ -36,8 +48,10 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
         <FontAwesomeIcon className="pr-2" icon={faArrowLeft} />
         Back
       </button>
-      <div className="flex flex-col md:flex-row items-start md:items-start 
-                      space-y-6 md:space-x-6 md:space-y-0  gap-10">
+      <div
+        className="flex flex-col md:flex-row items-start md:items-start 
+                      space-y-6 md:space-x-6 md:space-y-0  gap-10"
+      >
         <img
           src={
             selectedCountry.flags?.svg || "https://via.placeholder.com/320x213"
@@ -62,7 +76,8 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
                 {selectedCountry.population.toLocaleString() || "N/A"}
               </p>
               <p className="mb-2">
-                  <strong >Region:</strong> {getRegionFromSubRegion(selectedCountry.subregion) || "N/A"}
+                <strong>Region:</strong>{" "}
+                {getRegion(selectedCountry.subregion) || "N/A"}
               </p>
               <p className="mb-2">
                 <strong>Sub Region:</strong>{" "}
@@ -94,13 +109,18 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
             </div>
           </div>
 
-          <div className=" xl:flex xl:items-center gap-4 mt-6">
+          <div className=" xl:flex xl:items-center gap-4 mt-6 ">
             <h2 className="fontBold ">Border Countries:</h2>
             {borderCountryNames.length > 0 ? (
-              <ul className="flex flex-wrap gap-2 ">
+              <ul className="flex flex-wrap gap-2">
                 {borderCountryNames.map((borderName, index) => (
-                  <li key={index}>
-                    <button className="bg-elements px-3 py-1 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <li key={index} className="cursor-pointer ">
+                    <button
+                      className="bg-elements cursor-pointer px-3 py-1 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300"
+                      onClick={() =>
+                        setSelectedCountry(findCountryOptimized(borderName))
+                      }
+                    >
                       {borderName}
                     </button>
                   </li>
