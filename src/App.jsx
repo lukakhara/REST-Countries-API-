@@ -5,15 +5,18 @@ import SearchBar from "./components/SearchBar";
 import FilterBar from "./components/FilterBar";
 import Card from "./components/Card";
 import Detail from "./components/Detail";
-import { getRegion} from "./utils/getRegion";
+import { getRegion } from "./utils/getRegion";
 
 function App() {
+  // fetching data from the API and setting up state
+  // to store countries and other necessary data
+  // using useEffect to fetch data on component mount
 
   useEffect(() => {
-    document.title = 'Country Info App';
+    document.title = "Country Info App";
     fetch(
       "https://restcountries.com/v3.1/all?fields=name,population,cca3,capital,flags,languages,currencies,subregion,borders,tld"
-    ) 
+    )
       .then((response) => response.json())
       .then((allCountries) => {
         const countryMap = {};
@@ -32,34 +35,33 @@ function App() {
       });
   }, []);
 
- 
-
+  // and setting up dark mode, search term, filter, and selected country state
+  // using useState for managing state in the functional component
   const [darkMode, setDarkMode] = useState(false);
   const [countries, setCountries] = useState([]);
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
 
-
-
   // Filter countries based on the selected region
   const filteredCountries = countries.filter((country) => {
     const matchesCountryName = country.name.common
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const matchesRegion = filter === "all" || getRegion(country.subregion) === filter;
+    const matchesRegion =
+      filter === "all" || getRegion(country.subregion) === filter;
     return matchesRegion && matchesCountryName;
   });
 
- 
-
   return (
-    <div data-theme={darkMode} className="bg-background text-text min-h-screen   ">
+    <div data-theme={darkMode} className="bg-background text-text min-h-screen">
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
       {selectedCountry ? (
-        <Detail selectedCountry={selectedCountry} 
-                countries={countries} 
-                setSelectedCountry={setSelectedCountry} />
+        <Detail
+          selectedCountry={selectedCountry}
+          countries={countries}
+          setSelectedCountry={setSelectedCountry}
+        />
       ) : (
         <div className="xl:mx-18 w-[90%] mx-auto">
           <div
@@ -67,7 +69,7 @@ function App() {
            "
           >
             <SearchBar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
-            <FilterBar setFilter={setFilter} filter={filter}/>
+            <FilterBar setFilter={setFilter} filter={filter} />
           </div>
           <Card
             filteredCountries={filteredCountries}

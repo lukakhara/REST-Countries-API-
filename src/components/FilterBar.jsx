@@ -13,14 +13,21 @@ const FilterBar = ({ filter, setFilter }) => {
                  text-text bg-elements focus:outline-none focus:ring-2 
                  focus:ring-blue-500 flex justify-between items-center"
       >
-        {filter==='all' ? "Filter by Region" : filter}
+        {filter === "all" ? "Filter by Region" : filter}
         <svg
-          className={`w-5 h-5  transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`w-5 h-5  transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 
