@@ -39,13 +39,14 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
   const borderCountryNames = getBorderCountryNames(selectedCountry.borders);
 
   return (
-    <div className="px-10">
+    <div className="xl:px-16 px-8 ">
       <button
-        className=" shadow-xl shadow-black bg-elements   py-1 rounded-md flex items-center 
-            hover:shadow-lg transition-shadow duration-300 my-14 cursor-pointer"
+        className=" shadow-md shadow-[rgba(0, 0, 0, 0.822)]  bg-elements   py-[4px] rounded-[5px] flex items-center 
+              my-14 cursor-pointer shadow elements-bg 
+            px-6 "
         onClick={() => setSelectedCountry(null)}
       >
-        <FontAwesomeIcon className="pr-2" icon={faArrowLeft} />
+        <FontAwesomeIcon className="pr-2 " icon={faArrowLeft} />
         Back
       </button>
       <div
@@ -57,11 +58,11 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
             selectedCountry.flags?.svg || "https://via.placeholder.com/320x213"
           }
           alt="Country Flag"
-          className="flex-1 w-full  h-auto bg-cover md:w-1/3 shadow-lg"
+          className=" w-full max-w-[580px] flex-1 bg-contain  h-auto  shadow-lg"
           width={400}
-          height={267}
+          height={340}
         />
-        <div className=" md:w-2/3 flex flex-col gap-10 flex-1">
+        <div className="w-full  md:w-2/3 flex flex-col gap-10 flex-1">
           <h2 className="text-2xl fontBoldest ">
             {selectedCountry.name?.common || "Unknown Country"}
           </h2>
@@ -109,14 +110,18 @@ const Detail = ({ selectedCountry, countries, setSelectedCountry }) => {
             </div>
           </div>
 
-          <div className=" xl:flex xl:items-center gap-4 mt-6 ">
-            <h2 className="fontBold ">Border Countries:</h2>
+          <div className=" mt-6  mb-15">
+            <h2 className="fontBold mb-4">Border Countries:</h2>
             {borderCountryNames.length > 0 ? (
-              <ul className="flex flex-wrap gap-2">
+              <ul className="flex flex-wrap gap-x-4 gap-y-2 flex-wra ">
                 {borderCountryNames.map((borderName, index) => (
-                  <li key={index} className="cursor-pointer ">
+                  <li
+                    key={index}
+                    className="flex  elements-bg cursor-pointer  flex-col"
+                  >
                     <button
-                      className="bg-elements cursor-pointer px-3 py-1 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300"
+                      className=" bg-elements shadow cursor-pointer py-1 rounded-md 
+                      hover:shadow-lg transition-shadow duration-300 px-4"
                       onClick={() =>
                         setSelectedCountry(findCountryOptimized(borderName))
                       }

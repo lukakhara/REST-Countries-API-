@@ -66,8 +66,8 @@ function App() {
             className="sm:flex flex-row sm:space-between sm:items-center sm:justify-between mx-auto
            "
           >
-            <SearchBar setSearchTerm={setSearchTerm} />
-            <FilterBar setFilter={setFilter} />
+            <SearchBar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+            <FilterBar setFilter={setFilter} filter={filter}/>
           </div>
           <Card
             filteredCountries={filteredCountries}

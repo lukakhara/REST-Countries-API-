@@ -30,23 +30,28 @@
 } */
 
 :root {
-    --elements: hsl(0, 52%, 49%);
+    --elements: hsl(0, 100%, 100%);
     --background: hsl(0, 0%, 99%);
     --text:  hsl(200, 15%, 8%);
     --input: hsl(0, 0%, 50%);
+    --dropdownSelect: hsla(0, 2%, 35%, 0.5);
+    --dropdownSelectHover:hsla(0, 2%, 35%, 0.4);
 }
 
 [data-theme="true"] {
-    --elements:  hsl(209, 45%, 11%);
+    --elements:  hsl(209, 23%, 22%);
     --background: hsl(207, 26%, 17%);
     --text:  hsl(0, 100%, 100%);
     --input: hsl(0, 0%, 70%);
+    --dropdownSelect: hsla(0, 0%, 70%);
+    --dropdownSelectHover: hsla(0, 0%, 70%,0.2);
 }
 .bg-background {
     background-color: var(--background);
 }
-.text-elements {
-    color: var(--elements);
+
+.elements-bg {
+    background-color: var(--elements);
 }
 .text-input {
     color: var(--input);
@@ -54,12 +59,31 @@
 .text-text {
     color: var(--text);
 }
+.bg-inputs{
+    background-color: var(--input);
+}
+.dropdownSelect{
+    background-color: var(--dropdownSelect);
+}
+.dropdownSelectHover:hover{
+    background-color: var(--dropdownSelectHover);
+}
+
+
  select, option {
     font-family: 'nunitoSansregular', arial; 
     font-weight: 300;
     font-size: 16px; 
     color: #333; 
+    margin: 10px;
+    color:hsla(0, 0%, 100%, 0.827)
   }
+
+  
+.shadow{
+-webkit-box-shadow: 0px 1px 9px -4px #000000; 
+box-shadow: 0px 1px 9px -4px #000000;
+}
 @layer base {
     body {
         font-family: 'nunitoSansregular';
@@ -93,4 +117,12 @@
 }
 .test{
     @apply border-2 border-red-500;
+}
+::placeholder {
+  color: var(--text);
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Edge 12 -18 */
+  color: var(--text);
 }
